@@ -17,11 +17,14 @@ class StoreFactory extends Factory
      */
     public function definition(): array
     {
-        $name=$this->faker->word;
+        $name = $this->faker->word;
+
+        // Generate a unique slug
+        $slug = Str::slug($name . '-' . Str::random(8));
         return [
 
              'name' =>$name,
-             'slug' =>Str::slug($name),
+             'slug' => $slug ,
              'description'=>$this->faker->sentence(15),
              'logo_image'=>$this->faker->imageUrl(300,300),
              'cover_image'=>$this->faker->imageUrl(800,600),

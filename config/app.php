@@ -62,6 +62,8 @@ return [
 
     'asset_url' => env('ASSET_URL'),
 
+    'api_token'=>env('API_TOKEN'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
@@ -169,11 +171,13 @@ return [
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
+        App\Providers\FortifyServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\CartServiceProvider::class,
+
     ])->toArray(),
 
     /*

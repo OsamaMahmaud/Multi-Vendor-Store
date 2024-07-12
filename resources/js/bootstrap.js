@@ -23,7 +23,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 // window.Pusher = Pusher;
 
 // window.Echo = new Echo({
-//     broadcaster: 'pusher',
+//     broadcaster: 'reverb',
 //     key: import.meta.env.VITE_PUSHER_APP_KEY,
 //     cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER ?? 'mt1',
 //     wsHost: import.meta.env.VITE_PUSHER_HOST ?? `ws-${import.meta.env.VITE_PUSHER_APP_CLUSTER}.pusher.com`,
@@ -32,3 +32,18 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
 //     enabledTransports: ['ws', 'wss'],
 // });
+
+import Echo from 'laravel-echo'
+
+window.Echo = new Echo({
+  broadcaster: 'pusher',
+  key: '4ee343cb0fe61f7d7295',
+  cluster: 'ap1',
+  forceTLS: true
+});
+
+var channel = Echo.private(`App.Models.User.${userID}`);
+channel.notification(function(data) {
+    console.log(data);
+    alert(data.body);
+});

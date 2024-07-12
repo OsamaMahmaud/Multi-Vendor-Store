@@ -20,8 +20,10 @@ class Product extends Model
 
      protected $appends = ['image_path'];
 
+     protected $hidden=['created_at','updated_at','deleted_at','image'];
 
-     //image
+
+     //$product->image_url
      public function getImagePathAttribute()
      {
          if(!$this->image)
@@ -45,12 +47,14 @@ class Product extends Model
         return round(100 - (100 * $this->price / $this->compare_price), 0);
      }
 
-
-
      //globalScope
      protected static function booted()
     {
         static::addGlobalScope('store',new StoreScope());
+        static::creating(function(Product $product){
+             $product->slug = Str::slug($product->name);
+        });
+        
     }
 
 
@@ -59,8 +63,6 @@ class Product extends Model
     public function scopeActive(Builder $builder){
 
       $builder->where('status','active');
-
-
     }
 
 
@@ -88,13 +90,43 @@ class Product extends Model
         );
     }
 
+    //make scop filter
+    public function scopeFilter(Builder $builder, $filters)
+    {
+        //array_merge withe filter
+        $options = array_merge([
+            'category_id' => null,
+            'store_id' => null,
+            'tag_id'=>null,
+            'status'=>'active'],$filters);
 
+        //category_id    
+        $builder->when($options['category_id'],function($builder,$value){
+            return $builder->where('category_id',$value);
+        });
+        //store_id
+        $builder->when($options['store_id'],function($builder,$value){
+            return $builder->where('store_id',$value);
+            });
+         //tag_id
+         $builder->when($options['tag_id'],function($builder,$value){
+            return $builder->whereExists(function($query) use ($value){
+                    $query->select (1)  //select row 
+                    ->from('product_tag')
+                    ->whereColumn('product_tag.product_id','products.id')
+                    ->where('product_tag.tag_id',$value);
+                });
+            });
 
+         //status
+         $builder->when($options['status'],function($builder,$status){
+            return $builder->where('status',$status);
+            });
+            
+          
+
+    }
 
 
 
 }
-
-
-
-

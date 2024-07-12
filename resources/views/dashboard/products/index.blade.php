@@ -47,6 +47,8 @@
 
                                     <a href="{{ route('dashboard.products.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.add')</a>
 
+                                    <a href="{{ route('dashboard.product.import.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.import_product')</a>
+
 
                             </div>
 

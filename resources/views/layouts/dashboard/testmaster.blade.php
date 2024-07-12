@@ -142,29 +142,7 @@
                             </li>
 
                             {{--<!-- Notifications: style can be found in dropdown.less -->--}}
-                            <li class="dropdown notifications-menu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-bell-o"></i>
-                                    <span class="label label-warning">10</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="header">You have 10 notifications</li>
-                                    <li>
-                                        {{--<!-- inner menu: contains the actual data -->--}}
-                                        <ul class="menu">
-                                            <li>
-                                                <a href="#">
-                                                    <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="footer">
-                                        <a href="#">View all</a>
-                                    </li>
-                                </ul>
-                            </li>
-
+                               <x-dashboard.notifications-menu />
                             {{--<!-- Tasks: style can be found in dropdown.less -->--}}
                             <li class="dropdown tasks-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-flag-o"></i></a>
@@ -274,7 +252,12 @@
 <script src="{{ asset('dashboard_files/js/custom/image_preview.js') }}"></script>
 <script src="{{ asset('dashboard_files/js/custom/order.js') }}"></script>
 
+ <script>
+        const userID = "{{ Auth::id() }}";
+    </script>
+    <script src="{{ asset('js/app.js') }}"></script>
 <script>
+
     $(document).ready(function () {
 
         $('.sidebar-menu').tree();

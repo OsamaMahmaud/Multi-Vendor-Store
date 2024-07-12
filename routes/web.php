@@ -25,38 +25,39 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 // });
 
 
-//front routes
-Route::get('/',[HomeController::class,'index'])->name('home');
-
-//products routes
-Route::get('products', [ProductController::class,'index'])->name('product.all');
-
-Route::get('product/{product:slug}', [ProductController::class,'show'])->name('product.show');
 
 
+Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']], function () {
 
-// Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']], function () {
+    //front routes
+    Route::get('/', [HomeController::class, 'index'])->name('home');
 
-//      Route::get('/dashboard',[DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
-// });
+    //products routes
+    Route::get('products', [ProductController::class, 'index'])->name('product.all');
 
-//profileRoutes
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('product/{product:slug}', [ProductController::class, 'show'])->name('product.show');
+
+    //profileRoutes
+    Route::middleware('auth')->group(function () {
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    });
+
+    //cart routes
+    Route::resource('cart', CartController::class);
+    //  Route::put('/cart/{id}', [CartController::class, 'update']);
+
+
+    //checkoutRoutes
+    Route::get('checkout', [CheckoutControllers::class, 'create'])->name('checkout');
+    Route::post('checkout', [CheckoutControllers::class, 'store']);
 
 
 });
 
-//cart routes
- Route::resource('cart', CartController::class);
-//  Route::put('/cart/{id}', [CartController::class, 'update']);
 
 
-//checkoutRoutes
-Route::get('checkout',[CheckoutControllers::class,'create'])->name('checkout');
-Route::post('checkout',[CheckoutControllers::class,'store']);
 
-
-require __DIR__.'/auth.php';
+// require __DIR__.'/auth.php'; //to move from breeze to Fortify 

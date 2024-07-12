@@ -20,18 +20,30 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
-        $name=$this->faker->department;
+        $name = $this->faker->unique()->word;
+        $slug = Str::slug($name . '-' . Str::random(8));
+
+        // Preload stores and categories to pick from them randomly
+        static $stores;
+        static $categories;
+
+        if (!$stores) {
+            $stores = Store::all();
+        }
+
+        if (!$categories) {
+            $categories = Category::all();
+        }
+
         return [
-
-             'name' =>$name,
-             'slug' =>Str::slug($name),
-             'description'=>$this->faker->sentence(15),
-             'image'=>$this->faker->imageUrl(800,600),
-             'price'=>$this->faker->randomFloat(1,1,499),
-             'compare_price'=>$this->faker->randomFloat(1,500,999),
-             'store_id'=>Store::inRandomOrder()->first()->id,
-             'category_id'=>Category::inRandomOrder()->first()->id,
-
+            'name' => $name,
+            'slug' => $slug,
+            'description' => $this->faker->sentence(15),
+            'image' => $this->faker->imageUrl(800, 600),
+            'price' => $this->faker->randomFloat(1, 1, 499),
+            'compare_price' => $this->faker->randomFloat(1, 500, 999),
+            'store_id' => $stores->random()->id,
+            'category_id' => $categories->random()->id,
         ];
     }
 }

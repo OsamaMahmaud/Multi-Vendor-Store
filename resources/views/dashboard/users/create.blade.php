@@ -1,4 +1,4 @@
-@extends('layouts.dashboard.app')
+@extends('layouts.dashboard.testmaster')
 
 @section('content')
 
@@ -9,7 +9,7 @@
             <h1>@lang('site.users')</h1>
 
             <ol class="breadcrumb">
-                <li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
+                <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
                 <li><a href="{{ route('dashboard.users.index') }}"></i> @lang('site.users')</a></li>
                 <li class="active">@lang('site.add')</li>
             </ol>
@@ -44,15 +44,6 @@
                             <input type="email" name="email" class="form-control" value="{{ old('email') }}">
                         </div>
 
-                        <div class="form-group">
-                            <label>@lang('site.image')</label>
-                            <input type="file" name="image" class="form-control" id="imageInput" >
-                        </div>
-
-                        <div class="form-group">
-
-                            <img src="{{ asset('uploads/user_images/default.png') }}" alt="imagePreview" id="imagePreview" width="100px" class="img-thumbnail">
-                        </div>
 
                         <div class="form-group">
                             <label>@lang('site.password')</label>
@@ -64,7 +55,7 @@
                             <input type="password_confirmation" name="password_confirmation" class="form-control" value="{{ old('password_confirmation') }}">
                         </div>
 
-                         <!-- DRY => Dont Repeat Yourself -->
+                             <!-- DRY => Dont Repeat Yourself -->
                          <div class="form-group">
                             <label>@lang('site.permissions')</label>
                             <div class="nav-tabs-custom">
@@ -104,7 +95,6 @@
                         <div class="form-group">
                             <button class="btn btn-primary" type="submit"><i class="fa fa-plus"></i>@lang('site.add')</button>
                         </div>
-
 
                     </form><!-- end of form -->
 

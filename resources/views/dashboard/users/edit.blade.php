@@ -1,4 +1,4 @@
-@extends('layouts.dashboard.app')
+@extends('layouts.dashboard.testmaster')
 
 @section('content')
 
@@ -9,7 +9,7 @@
             <h1>@lang('site.users')</h1>
 
             <ol class="breadcrumb">
-                <li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
+                <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
                 <li><a href="{{ route('dashboard.users.index') }}"></i> @lang('site.users')</a></li>
                 <li class="active">@lang('site.edit')</li>
             </ol>
@@ -44,15 +44,6 @@
                             <input type="email" name="email" class="form-control" value="{{ $users->email }}">
                         </div>
 
-                        <div class="form-group">
-                            <label>@lang('site.image')</label>
-                            <input type="file" name="image" class="form-control" id="imageInput" >
-                        </div>
-
-                        <div class="form-group">
-
-                            <img src="{{$users->image_path}}" alt="imagePreview" id="imagePreview" width="100px" class="img-thumbnail">
-                        </div>
 
                          <!-- DRY => Dont Repeat Yourself -->
                          <div class="form-group">
@@ -60,7 +51,7 @@
                             <div class="nav-tabs-custom">
 
                                 @php
-                                    $models = ['users', 'categories', 'products', 'clients', 'orders'];
+                                    $models = ['admins', 'categories', 'products', 'profiles', 'orders'];
                                     $maps = ['create', 'read', 'update', 'delete'];
                                 @endphp
 

@@ -86,12 +86,17 @@
                                                 <button type="submit" class="btn btn-info update btn-sm" >Restore</button>
                                             </form>
 
-
+                                              @if (auth()->user()->hasPermission('delete_users'))
                                                 <form action="{{ route('dashboard.category.force-delete', $category->id) }}" method="post" style="display: inline-block">
                                                     {{ csrf_field() }}
                                                     {{ method_field('delete') }}
                                                     <button type="submit" class="btn btn-danger delete btn-sm"><i class="fa fa-trash"></i> @lang('site.delete')</button>
                                                 </form><!-- end of form -->
+                                              @else
+                                                <button class="btn btn-danger btn-sm disabled"><i class="fa fa-trash"></i>@lang('site.delete')</button>
+                                              @endif
+
+                                            
                                         </td>
                                     </tr>
 

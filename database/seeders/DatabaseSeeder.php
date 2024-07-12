@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Admin;
 use App\Models\Store;
 use App\Models\Product;
 use App\Models\Category;
@@ -21,10 +22,16 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        $this->call(LaratrustSeeder::class);
+
+        $this->call(AdminsTableSeeder::class);
 
         Category::factory(10)->create();
-        // Store::factory(5)->create();
+        Store::factory(5)->create();
         Product::factory(100)->create();
+
+
+        // Admin::factory(3)->create();
 
         // $this->call([UserSeeder::class]);
     }

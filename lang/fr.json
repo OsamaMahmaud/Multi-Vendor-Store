@@ -1,0 +1,14 @@
+{
+    "Home":"Maison",
+    "About":"A propos",
+    "Contact":"Contact",
+    "Login":"Connexion",
+    "Register":"Inscription",
+    "Logout":"Déconnexion",
+    "Name":"Nom",
+    "Email":"Email",
+    "Password":"Mot de passe",
+    "ConfirmPassword":"Confirmer le mot de passe",
+    "ForgotPassword":"Mot de passe oublié ?"
+
+}

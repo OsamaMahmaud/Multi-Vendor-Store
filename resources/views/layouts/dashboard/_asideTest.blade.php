@@ -23,6 +23,8 @@
 
         <ul class="sidebar-menu" data-widget="tree">
 
+
+
             {{-- //dashboard --}}
             <li><a href="{{ route('dashboard') }}"><i class="fa fa-th"></i><span>@lang('site.dashboard')</span></a></li>
 
@@ -36,9 +38,6 @@
             <li><a href="{{ route('dashboard.user.profile') }}"><i class="fa fa-th"></i><span>@lang('site.profile')</span></a></li>
 
 
-
-
-
             <li class="user-footer">
 
                 <a href="{{ route('logout') }}" class="btn btn-default btn-flat" onclick="event.preventDefault();
@@ -48,6 +47,9 @@
                 </form>
 
             </li>
+
+            <li><a href="{{ route('dashboard.users.index') }}"><i class="fa fa-th"></i><span>@lang('site.users')</span></a></li>
+
 
 
 
